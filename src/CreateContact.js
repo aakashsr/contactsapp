@@ -1,4 +1,3 @@
-// CreateContact.js
 import React, { Component } from "react";
 
 class CreateContact extends Component {
