@@ -6,11 +6,18 @@ class ListContacts extends Component {
     query: ""
   };
 
-  handleChange = event => {
-    this.setState({
-      query: event.target.value
-    });
-  };
+  // handleChange = event => {
+  //   this.setState({
+  //     query: event.target.value
+  //   });
+  // };
+
+  updateQuery = (value) => {
+    this.setState( () => ({
+      query:value
+    }))
+  }
+
   render() {
     return (
       <div className="list-contacts">
@@ -20,7 +27,7 @@ class ListContacts extends Component {
             type="text"
             placeholder="Search Contacts"
             value={this.state.query}
-            onChange={this.handleChange}
+            onChange={(event) => (this.updateQuery(event.target.value))}
           />
         </div>
         <ol className="contact-list">
