@@ -12,13 +12,19 @@ class ListContacts extends Component {
   //   });
   // };
 
-  updateQuery = (value) => {
-    this.setState( () => ({
-      query:value
-    }))
-  }
+  updateQuery = value => {
+    this.setState(() => ({
+      query: value
+    }));
+  };
 
   render() {
+    const { query } = this.state;
+    const { contacts, onDeleteContact } = this.props;
+
+    const showingContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(query.toLowerCase())
+    );
     return (
       <div className="list-contacts">
         <div className="list-contacts-top">
@@ -26,12 +32,12 @@ class ListContacts extends Component {
             className="search-contacts"
             type="text"
             placeholder="Search Contacts"
-            value={this.state.query}
-            onChange={(event) => (this.updateQuery(event.target.value))}
+            value={query}
+            onChange={event => this.updateQuery(event.target.value)}
           />
         </div>
         <ol className="contact-list">
-          {this.props.contacts.map(contact => (
+          {showingContacts.map(contact => (
             <li key={contact.id} className="contact-list-item">
               <div
                 className="contact-avatar"
@@ -44,7 +50,7 @@ class ListContacts extends Component {
                 <p>{contact.handle}</p>
               </div>
               <button
-                onClick={() => this.props.onDeleteContact(contact)} // One thing to note is that since we need to pass in contact as an argument we need to wrap the onDeleteContact function call in an arrow function.
+                onClick={() => onDeleteContact(contact)} // One thing to note is that since we need to pass in contact as an argument we need to wrap the onDeleteContact function call in an arrow function.
                 className="contact-remove"
               >
                 Remove
