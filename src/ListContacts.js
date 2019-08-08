@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class ListContacts extends Component {
   // const { removeContacts } = removeContacts ;
@@ -18,7 +19,10 @@ class ListContacts extends Component {
               <p>{contact.name}</p>
               <p>{contact.handle}</p>
             </div>
-            <button onClick={() => this.props.onDeleteContact(contact)} className="contact-remove">
+            <button
+              onClick={() => this.props.onDeleteContact(contact)} // One thing to note is that since we need to pass in contact as an argument we need to wrap the onDeleteContact function call in an arrow function.
+              className="contact-remove"
+            >
               Remove
             </button>
           </li>
@@ -27,5 +31,10 @@ class ListContacts extends Component {
     );
   }
 }
+
+ListContacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onDeleteContact: PropTypes.func.isRequired
+};
 
 export default ListContacts;
