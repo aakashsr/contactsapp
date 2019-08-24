@@ -1,19 +1,13 @@
 import React from "react";
 import Button from "./Buttons";
+import ContactDetails from "./ContactDetails";
+import ContactAvatar from "./ContactAvatar";
 
 function Contact({ contact, id, avatarURL, name, handle, onDeleteContact }) {
   return (
     <li key={id} className="contact-list-item">
-      <div
-        className="contact-avatar"
-        style={{
-          backgroundImage: `url(${avatarURL})`
-        }}
-      />
-      <div className="contact-details">
-        <p>{name}</p>
-        <p>{handle}</p>
-      </div>
+      <ContactAvatar avatarURL={avatarURL} />
+      <ContactDetails name={name} handle={handle} />
       <Button contact={contact} onDeleteContact={onDeleteContact} />
     </li>
   );
