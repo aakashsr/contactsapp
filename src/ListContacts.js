@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom';
+import Contact from "./Contact";
+import { Link } from "react-router-dom";
 
 class ListContacts extends Component {
   state = {
@@ -43,10 +44,9 @@ class ListContacts extends Component {
             onChange={event => this.updateQuery(event.target.value)}
           />
 
-         <Link to="create" className="add-contact">
+          <Link to="create" className="add-contact">
             Add Contact
           </Link>
-           
         </div>
 
         {showingContacts.length !== contacts.length && (
@@ -60,24 +60,14 @@ class ListContacts extends Component {
 
         <ol className="contact-list">
           {showingContacts.map(contact => (
-            <li key={contact.id} className="contact-list-item">
-              <div
-                className="contact-avatar"
-                style={{
-                  backgroundImage: `url(${contact.avatarURL})`
-                }}
-              />
-              <div className="contact-details">
-                <p>{contact.name}</p>
-                <p>{contact.handle}</p>
-              </div>
-              <button
-                onClick={() => onDeleteContact(contact)} // One thing to note is that since we need to pass in contact as an argument we need to wrap the onDeleteContact function call in an arrow function.
-                className="contact-remove"
-              >
-                Remove
-              </button>
-            </li>
+            <Contact
+              contact={contact}
+              id={contact.id}
+              avatarURL={contact.avatarURL}
+              name={contact.name}
+              handle={contact.handle}
+              onDeleteContact={onDeleteContact}
+            />
           ))}
         </ol>
       </div>
